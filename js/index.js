@@ -1,4 +1,5 @@
-const felhasznalo = "example"
+const prompt = require('prompt-sync')();
+const felhasznalo = prompt("Adj meg egy felhasználó nevet: ")
 let IsBanned;
 let url = "https://en.pronouns.page/api/profile/get/"+felhasznalo+"?version=2";
 let settings = { method: "Get" };

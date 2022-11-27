@@ -1,6 +1,7 @@
 require 'httparty'
 
-user = "example"
+puts("Adj meg egy felhasználó nevet: ")
+user = gets.chop
 url = 'https://pronouns.page/api/profile/get/'+user+'?version=2'
 response = HTTParty.get(url)
 result = response.parsed_response

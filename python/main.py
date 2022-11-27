@@ -2,7 +2,7 @@ import requests
 from requests.exceptions import HTTPError
 
 try:
-    user = "example"
+    user = input("Adj meg egy felhasználó nevet: ")
     response = requests.get('https://pronouns.page/api/profile/get/'+user+'?version=2')
     response.raise_for_status()
     result = response.json()

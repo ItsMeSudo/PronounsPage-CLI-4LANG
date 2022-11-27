@@ -57,7 +57,9 @@ type Response struct {
 func main() {
 
 	// Get req
-	var user string = "example"
+	var user string
+	fmt.Printf("Adj meg egy felhasználó nevet: ")
+	fmt.Scanln(&user)
 
 	resp, err := http.Get("https://pronouns.page/api/profile/get/" + user + "?version=2")
 	if err != nil {

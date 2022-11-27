@@ -1,6 +1,6 @@
 {
-  "name": "pronounsp-api-client",
-  "version": "1.0.0",
+  "name": "pronounspage-cli",
+  "version": "1.1.0",
   "description": "PronounsPage api használat cliből",
   "main": "index.js",
   "scripts": {
@@ -8,5 +8,8 @@
   },
   "keywords": [],
   "author": "ZUDOOO",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "prompt-sync": "^4.2.0"
+  }
 }
