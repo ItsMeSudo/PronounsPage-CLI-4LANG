@@ -9,6 +9,8 @@ puts("Felhasználó: "+result['username'])
 
 IsBanned = ""
 DontUseThisLol = ""
+OtherWords = ""
+
 if result['bannedReason'] == nil
     IsBanned.concat("Nem")
 else
@@ -17,97 +19,46 @@ end
 
 puts("Bannolva?: " + IsBanned)
 
-Pronounss = ""
-for i in result['profiles']['en']['pronouns']
-   if i['opinion'] == 'yes'
-    Pronounss.concat(i['value'])
-    Pronounss.concat(", ")
-   elsif i['opinion'] == 'meh'
-    Pronounss.concat(i['value'])
-    Pronounss.concat(", ")
-   else
-    DontUseThisLol.concat(i['value'])
-    DontUseThisLol.concat(", ")
+
+def ifforcycle(input)
+   out = ""
+   for i in input
+      if i['opinion'] == 'yes'
+         out.concat(i['value'])
+         out.concat(", ")
+      elsif i['opinion'] == 'meh'
+         out.concat(i['value'])
+         out.concat(", ")
+      elsif i['opinion'] == 'no'
+         DontUseThisLol.concat(i['value'])
+         DontUseThisLol.concat(", ")
+      else
+         OtherWords.concat(i['value'])
+         OtherWords.concat(", ")
+      end
    end
+   return out.chop.chop
 end
-puts("Névmások: " + Pronounss.chop.chop)
+
+def defaforcycle(input)
+   out = ""
+   for i in input
+      out.concat(i)
+      out.concat(", ")
+  end
+  return out.chop.chop
+end
+
+puts("Névmások: " + ifforcycle(result['profiles']['en']['pronouns']))
 puts("Kor: #{result['profiles']['en']['age']}")
-
-Linkss = ""
-for i in result['profiles']['en']['links']
-    Linkss.concat(i)
-    Linkss.concat(", ")
-end
-puts("Linkek: " + Linkss.chop.chop)
-
-Flagss = ""
-for i in result['profiles']['en']['flags']
-    Flagss.concat(i)
-    Flagss.concat(", ")
-end
-puts("Megadott zászlók: " + Flagss.chop.chop)
-
-Honorifics = ""
-for i in result['profiles']['en']['words'][0]['values']
-   if i['opinion'] == 'yes'
-    Honorifics.concat(i['value'])
-    Honorifics.concat(", ")
-   elsif i['opinion'] == 'meh'
-    Honorifics.concat(i['value'])
-    Honorifics.concat(", ")
-   else
-    DontUseThisLol.concat(i['value'])
-    DontUseThisLol.concat(", ")
-   end
-end
-
-PndFD = ""
-for i in result['profiles']['en']['words'][1]['values']
-   if i['opinion'] == 'yes'
-    PndFD.concat(i['value'])
-    PndFD.concat(", ")
-   elsif i['opinion'] == 'meh'
-    PndFD.concat(i['value'])
-    PndFD.concat(", ")
-   else
-    DontUseThisLol.concat(i['value'])
-    DontUseThisLol.concat(", ")
-   end
-end
-
-Compliments = ""
-for i in result['profiles']['en']['words'][2]['values']
-   if i['opinion'] == 'yes'
-    Compliments.concat(i['value'])
-    Compliments.concat(", ")
-   elsif i['opinion'] == 'meh'
-    Compliments.concat(i['value'])
-    Compliments.concat(", ")
-   else
-    DontUseThisLol.concat(i['value'])
-    DontUseThisLol.concat(", ")
-   end
-end
-
-Rship = ""
-for i in result['profiles']['en']['words'][3]['values']
-   if i['opinion'] == 'yes'
-    Rship.concat(i['value'])
-    Rship.concat(", ")
-   elsif i['opinion'] == 'meh'
-    Rship.concat(i['value'])
-    Rship.concat(", ")
-   else
-    DontUseThisLol.concat(i['value'])
-    DontUseThisLol.concat(", ")
-   end
-end
-
-puts("Megszólítások: " + Honorifics.chop.chop)
-puts("Barátoknak és családnak: " + PndFD.chop.chop)
-puts("Bókok: " + Compliments.chop.chop)
-puts("Kapcsolat leírások: " + Rship.chop.chop)
+puts("Linkek: " + defaforcycle(result['profiles']['en']['links']))
+puts("Megadott zászlók: " + defaforcycle(result['profiles']['en']['flags']))
+puts("Megszólítások: " + ifforcycle(result['profiles']['en']['words'][0]['values']))
+puts("Barátoknak és családnak: " + ifforcycle(result['profiles']['en']['words'][1]['values']))
+puts("Bókok: " + ifforcycle(result['profiles']['en']['words'][2]['values']))
+puts("Kapcsolat leírások: " + ifforcycle(result['profiles']['en']['words'][3]['values']))
 puts("----------------------------------------------------------------------------------------")
 puts("Nem preferált kifejezések: " + DontUseThisLol.chop.chop)
+puts("Egyéb kifejezések: " + OtherWords.chop.chop)
 puts("----------------------------------------------------------------------------------------")
 puts("SUDO#0814 2022")

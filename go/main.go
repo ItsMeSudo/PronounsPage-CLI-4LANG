@@ -74,6 +74,7 @@ func main() {
 	}
 
 	var DontUseThatLol string
+	var OtherWords string
 
 	fmt.Printf("Felhasználó: %v\n", result.Username)
 
@@ -89,8 +90,10 @@ func main() {
 	for _, element := range result.Profiles.En.Names {
 		if element.Opinion == "yes" || element.Opinion == "meh" {
 			Names += element.Value + ", "
-		} else {
+		} else if element.Opinion == "no" {
 			DontUseThatLol += element.Value + ", "
+		} else {
+			OtherWords += element.Value + ", "
 		}
 	}
 	Names = Names[:len(Names)-2]
@@ -100,8 +103,10 @@ func main() {
 	for _, element := range result.Profiles.En.Pronouns {
 		if element.Opinion == "yes" || element.Opinion == "meh" {
 			Pronounss += element.Value + ", "
-		} else {
+		} else if element.Opinion == "no" {
 			DontUseThatLol += element.Value + ", "
+		} else {
+			OtherWords += element.Value + ", "
 		}
 	}
 	Pronounss = Pronounss[:len(Pronounss)-2]
@@ -115,8 +120,10 @@ func main() {
 	for _, element := range result.Profiles.En.Words[0].Values {
 		if element.Opinion == "yes" || element.Opinion == "meh" {
 			Honorifics += element.Value + ", "
-		} else {
+		} else if element.Opinion == "no" {
 			DontUseThatLol += element.Value + ", "
+		} else {
+			OtherWords += element.Value + ", "
 		}
 	}
 	Honorifics = Honorifics[:len(Honorifics)-2]
@@ -127,8 +134,10 @@ func main() {
 	for _, element := range result.Profiles.En.Words[1].Values {
 		if element.Opinion == "yes" || element.Opinion == "meh" {
 			PndFD += element.Value + ", "
-		} else {
+		} else if element.Opinion == "no" {
 			DontUseThatLol += element.Value + ", "
+		} else {
+			OtherWords += element.Value + ", "
 		}
 	}
 	PndFD = PndFD[:len(PndFD)-2]
@@ -138,8 +147,10 @@ func main() {
 	for _, element := range result.Profiles.En.Words[2].Values {
 		if element.Opinion == "yes" || element.Opinion == "meh" {
 			Compliments += element.Value + ", "
-		} else {
+		} else if element.Opinion == "no" {
 			DontUseThatLol += element.Value + ", "
+		} else {
+			OtherWords += element.Value + ", "
 		}
 	}
 	Compliments = Compliments[:len(Compliments)-2]
@@ -149,15 +160,19 @@ func main() {
 	for _, element := range result.Profiles.En.Words[3].Values {
 		if element.Opinion == "yes" || element.Opinion == "meh" {
 			Rship += element.Value + ", "
-		} else {
+		} else if element.Opinion == "no" {
 			DontUseThatLol += element.Value + ", "
+		} else {
+			OtherWords += element.Value + ", "
 		}
 	}
 	Rship = Rship[:len(Rship)-2]
 	fmt.Printf("Kapcsolat leírások: %v\n", Rship)
 	fmt.Printf("----------------------------------------------------------------------------------------\n")
 	DontUseThatLol = DontUseThatLol[:len(DontUseThatLol)-2]
+	OtherWords = OtherWords[:len(OtherWords)-2]
 	fmt.Printf("Nem preferált kifejezések: %v\n", DontUseThatLol)
+	fmt.Printf("Egyéb kifejezések: %v\n", OtherWords)
 	fmt.Printf("----------------------------------------------------------------------------------------\n")
 	fmt.Printf("SUDO#0814 2022")
 }
