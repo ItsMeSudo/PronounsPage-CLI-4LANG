@@ -49,6 +49,7 @@ def defaforcycle(input)
   return out.chop.chop
 end
 
+puts("Preferált megnevezések: " + ifforcycle(result['profiles']['en']['names']))
 puts("Névmások: " + ifforcycle(result['profiles']['en']['pronouns']))
 puts("Kor: #{result['profiles']['en']['age']}")
 puts("Linkek: " + defaforcycle(result['profiles']['en']['links']))
